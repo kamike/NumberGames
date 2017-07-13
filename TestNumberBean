@@ -1,0 +1,29 @@
+package com.wangtao.test;
+
+public class TestNumberBean {
+	public int number;
+	@Override
+	public int hashCode() {
+		
+		return 0;
+	}
+	@Override
+	public String toString() {
+		return number+"";
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TestNumberBean other = (TestNumberBean) obj;
+		
+		if (number != other.number)
+			return false;
+		return true;
+	}
+	
+}
