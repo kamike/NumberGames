@@ -1,0 +1,65 @@
+package com.wangtao.test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
+public class TestNumber {
+	//数字长度
+	public static final int MAX_LENGTH = 12;
+	public static void main(String[] args) {
+		Set<TestNumberBean> set = new HashSet<TestNumberBean>();
+		ArrayList<Integer> list = new ArrayList<>();
+		Random random = new Random();
+		int times = 0;
+		int successTimes=0;
+		while (true) {
+			times++;
+			// 生成随机数
+			set.clear();
+			while (set.size() < MAX_LENGTH) {
+				TestNumberBean number = new TestNumberBean();
+				number.number = random.nextInt(MAX_LENGTH) + 1;
+				set.add(number);
+			}
+			// 复制
+			list.clear();
+			for (TestNumberBean test : set) {
+				list.add(test.number);
+			}
+			if (perLineEquals(list)&&perCircleEquals(list)) {
+				successTimes++;
+				System.out.println(list);
+				continue;
+			}
+			if(successTimes>30){
+				break;
+			}
+		}
+		System.out.println("计算了多少次：" + times+",最终有多少种结果："+successTimes);
+	}
+	/**
+	 * 内圈和外圈加起来相等
+	 */
+	private static boolean perCircleEquals(ArrayList<Integer> list) {
+		int circleOut=list.get(0)+list.get(1)+list.get(2)+list.get(3)+list.get(4)+list.get(5);
+		int circleIn=list.get(6)+list.get(7)+list.get(8)+list.get(9)+list.get(10)+list.get(11);
+		if(circleOut==circleIn){
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * 三条线加起来想等
+	 */
+	private static boolean perLineEquals(ArrayList<Integer> list) {
+		int line1=list.get(0)+list.get(3)+list.get(6)+list.get(9);
+		int line2=list.get(1)+list.get(4)+list.get(7)+list.get(10);
+		int line3=list.get(2)+list.get(5)+list.get(8)+list.get(11);
+		if(line1==line2&&line1==line3){
+			return true;
+		}
+		return false;
+	}
+}
